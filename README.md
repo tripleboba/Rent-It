@@ -1,5 +1,14 @@
-# Getting Started with Create React App
+## Rent It App
+The app lets users rent random items for their needs.
 
+---
+🤝 group project (team of 2): 👤[Jolin Zhang](https://github.com/Jolinlovecode) & 👤me
+
+🧰 React, Express, Node, (updating...)
+
+📎 [Project Planning Document](https://docs.google.com/document/d/1sMlIi3WJHp9NcmU6wGgn4QZvl4PSnnIVa_nAnSjeHhM/edit?usp=sharing)
+
+---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
