@@ -5,7 +5,8 @@ The app lets users rent random items for their needs.
 🤝 group project (team of 2): 👤[Jolin Zhang](https://github.com/Jolinlovecode) & 👤me
 
 🧰 Stack <br>
-- Front-end: React, routes handlers: react-router-dom
+- Front-end: React
+  - routes handlers: `react-router-dom`
 - Back-end: Express, Node
 
 📎 [Project Planning Document](https://docs.google.com/document/d/1sMlIi3WJHp9NcmU6wGgn4QZvl4PSnnIVa_nAnSjeHhM/edit?usp=sharing)
