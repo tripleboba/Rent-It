@@ -1,21 +1,29 @@
-import { React, Fragment } from 'react'
-// import './Header.scss'
-import {Button} from 'bulma'
+import { React } from 'react'
+import './Header.scss'
 
 export default function Header() {
   return (
-    <Fragment>
 
-      <div className="navbar">
-        <div className="header_logo">RENT IT</div>
-        <div className="header_nav">
-          <div className="header_nav_item">On Renting (0 item)</div>
-          <div className="header_nav_item">Rented History</div>
-          <div className="header_nav_item">Signup/SignIn</div>
+      <nav className="navbar is-warning" role="navigation" aria-label="main navigation">
+        
+        <div classNameName="navbar-brand">
+          <div classNameName="navbar-item">
+            <a  className="navbar-item"
+                href="/">RENT IT</a>
+          </div>
         </div>
-      
-      </div>
+        
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <a  className="navbar-item"
+                href="/renting">On Renting (0 item) </a>
+            <a  className="navbar-item"
+                href="/rented">Rented History </a>
+            <div className="navbar-item"> Signup/Login </div>
+          </div>
+        </div>
 
-    </Fragment>
+      </nav>
+
   )
 }

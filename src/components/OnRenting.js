@@ -1,7 +1,10 @@
-import { React, Fragment } from 'react'
+import { React } from 'react'
 
 export default function OnRenting() {
   return (
-    <div>Me is OnRenting page</div>
+    <section className='section'>
+      
+      <div className='title'>On Renting</div>
+    </section>
   )
 }
