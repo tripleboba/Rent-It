@@ -1,10 +1,12 @@
 import { React, Fragment } from 'react'
+// import './Header.scss'
+import {Button} from 'bulma'
 
 export default function Header() {
   return (
     <Fragment>
 
-      <div className="header">
+      <div className="navbar">
         <div className="header_logo">RENT IT</div>
         <div className="header_nav">
           <div className="header_nav_item">On Renting (0 item)</div>
