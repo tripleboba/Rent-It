@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // components
-import Nav from "./components/Nav";
+import Header from "./components/Header";
 import Home from './components/Home';
 import OnRenting from "./components/OnRenting";
 // stylesheet
@@ -9,7 +9,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <Nav />
+      <Header />
 
       <Router>
         <Routes>
