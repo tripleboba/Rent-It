@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // components
 import Header from "./components/Header";
-import Home from './components/Home';
+import Item from "./components/Item";
+import ItemsList from './components/ItemsList';
 import OnRenting from "./components/OnRenting";
 import RentedHistory from "./components/RentedHistory";
 // stylesheet
-import './styles/App.scss';
+import './styles/App.css';
 
 function App() {
   return (
@@ -21,15 +22,9 @@ function App() {
       <Header />
       <Router>
         <Routes>
-          <Route path="/" 
-            element={<Home/>}
-          />
-          <Route path="/renting"
-            element={<OnRenting />}
-          />
-          <Route path="/rented"
-            element={<RentedHistory />}
-          />
+          <Route path="/" element={<ItemsList />} />
+          <Route path="/renting" element={<OnRenting />} />
+          <Route path="/rented" element={<RentedHistory />} />
         </Routes>
       </Router>
     </div>
