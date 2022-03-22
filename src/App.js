@@ -9,10 +9,10 @@ import './styles/App.css';
 
 // hardcode database
 const items = [
-  {id: 1, title:"shoe", description:"shoe is for renting",isRenting:false, image:"https://i.redd.it/1pmsjnk8f1g01.jpg"},
-  {id: 2, title:"book", description:"book is for renting", isRenting:false, image:"https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F13%2F2015%2F04%2F05%2Ffeatured.jpg&q=60"},
-  {id: 3, title:"bottle", description:"bottle is for renting", isRenting:true, image:"https://lh3.googleusercontent.com/2hDpuTi-0AMKvoZJGd-yKWvK4tKdQr_kLIpB_qSeMau2TNGCNidAosMEvrEXFO9G6tmlFlPQplpwiqirgrIPWnCKMvElaYgI-HiVvXc=w600"},
-  {id: 4, title:"table", description:"table is for renting", isRenting:false, image:"http://www.dumpaday.com/wp-content/uploads/2020/06/00-57-750x280.jpg"}
+  {id: 1, title:"hot pork", description:"a spicy pig that can code",isRenting:false, cost: 12,image:"https://i.pinimg.com/originals/76/ac/74/76ac7443cee64e44a905aafae9fb49dd.gif"},
+  {id: 2, title:"demanding cat", description:"eat every 5 minutes", isRenting:false, cost: 5,image:"https://i.pinimg.com/originals/6a/0e/ad/6a0ead42d3907b1310e67c33cb638211.gif"},
+  {id: 3, title:"judging monkey", description:"for someone wants judgmental pet", isRenting:true, cost: 20,image:"https://media0.giphy.com/media/cJMlR1SsCSkUjVY3iK/giphy.gif?cid=ecf05e47t053t561jjr34snk2gvgrobziionmb3igwnydwqo&rid=giphy.gif&ct=g"},
+  {id: 4, title:"chick tripper", description:"🔞 parental advisory ", isRenting:false, cost: 250,image:"https://media1.giphy.com/media/cQz5MLlnP5rfa/giphy-downsized-large.gif"}
 ];
 
 function App() {

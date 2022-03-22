@@ -15,7 +15,7 @@ export default function ItemsList(props) {
   // ];
   return (
     <div className='section'>
-      <div className='title'>Items Listing</div>
+      <div className='title is-4'>Items Listing</div>
         <div className="column columns is-multiline">
           {items && items.length ? (
             items.map((item) => (
@@ -37,3 +37,4 @@ export default function ItemsList(props) {
 
   );
 }
+
