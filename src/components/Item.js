@@ -1,4 +1,5 @@
 import React from "react"
+import { useStateValue } from "../providers/StateProvider";
 /**
  * Item"s information
  * Act as each item"s page
@@ -6,6 +7,26 @@ import React from "react"
 
 export default function Item(props) {
   const {...item} = props;
+
+  // handle 'rent-now' button to get the data of the item
+  const [{rentingBasket}, dispatch] = useStateValue();
+  console.log("renting basket: ", rentingBasket);
+  const addToRenting = () => {
+    // push item into the context layer
+    dispatch({
+      type: "ADD_TO_RENTING",
+      item: {
+        ...item
+        // id: item.id,
+        // image: item.image,
+        // title: item.title,
+        // description: item.description,
+        // cost: item.cost,
+        // isRenting: item.isRenting,
+        // rentTime: item.rentTime
+      },
+    });
+  }
   
   return (
 
@@ -69,7 +90,7 @@ export default function Item(props) {
                     //     amount: 1
                     //   })
                     // }
-                    > Rent Now </button>
+                    onClick={addToRenting}> Rent Now </button>
                 </div>
               </div>)
             }

@@ -1,7 +1,16 @@
 import { React } from 'react'
-import logo from '../styles/logo.png'
+import { useStateValue } from '../providers/StateProvider'
+// import logo from '../styles/logo.png'
 
 export default function Header() {
+  // for count on-renting items when 'rent now' button is clicked
+  const [{rentingBasket}, dispatch] = useStateValue();
+  const formatItemsCounter = items => {
+    if (items === 0) return '';
+    else if (items === 1) return "(1 item)";
+    else return `(${items} items)`;
+  }
+
   return (
 
       <nav className="navbar" role="navigation" aria-label="main navigation">
@@ -20,7 +29,7 @@ export default function Header() {
         <div className="navbar-end">
           {/* <div className="navbar-item"> */}
             <a  className="navbar-item"
-                href="/renting"> On Renting (0 item) </a>
+                href="/renting"> On Renting {formatItemsCounter(rentingBasket.length)} </a>
             <a  className="navbar-item"
                 href="/rented"> Rented History </a>
             <div className="navbar-item"> Signup/Login </div>

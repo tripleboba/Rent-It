@@ -18,11 +18,11 @@ export default function OnRenting(props) {
       <div className='title is-4'>Currently Renting</div>
         <div className="column columns is-multiline">
           {items && items.length ? listOfCurrentlyRentingItems : 
-            ( <div className="column">
+             <div className="column">
                 <span className="title has-text-grey-light">
                   No items found!
                 </span>
-              </div> )
+              </div> 
           }
         </div>
     </div>
