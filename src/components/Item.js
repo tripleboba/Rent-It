@@ -1,9 +1,9 @@
 import React from "react"
-import '../styles/Item.scss'
 /**
  * Item"s information
  * Act as each item"s page
  */
+
 export default function Item(props) {
   const {...item} = props;
   
@@ -27,7 +27,7 @@ export default function Item(props) {
             
             {item.isRenting ? (
               <div className="container">
-                <small className="has-text-danger">Out Of Stock</small>
+                <small className="has-text-danger">Not Available</small>
                 <br></br><br></br>
                 <div className="is-clearfix">
                   <div className="field is-pulled-left">
@@ -46,7 +46,7 @@ export default function Item(props) {
               </div>
             ) : (
               <div className="container">
-                <small className="">Available</small>
+                <small className="has-text-primary">Available</small>
                 <br></br><br></br>
                 <div className="is-clearfix">
                   <div className="field is-pulled-left">
@@ -71,7 +71,7 @@ export default function Item(props) {
                     // }
                     > Rent Now </button>
                 </div>
-              </div>  )
+              </div>)
             }
           </div>
         </div>
