@@ -7,6 +7,14 @@ import { useStateValue } from "../providers/StateProvider";
 
 export default function OnRentingItem(props) {
   const {...item} = props;
+  const [{rentingBasket}, dispatch] = useStateValue();
+  console.log("renting basket from OnRentingItem.js: ", rentingBasket);
+  const removeFromRenting = () => {
+    dispatch({
+      type: "REMOVE_FROM_RENTING", 
+      id: item.id,
+    })
+  }
 
   return (
     <div className=" column is-half">
@@ -30,7 +38,7 @@ export default function OnRentingItem(props) {
                   // onClick={}
                   >Extend Time</button>
                 <button class="button is-small is-danger is-outlined"
-                  // onClick={}
+                  onClick={removeFromRenting}
                   >Cancel</button>
               </div>
           </div>
@@ -40,12 +48,3 @@ export default function OnRentingItem(props) {
 
   );
 }
-
-            // <div className="is-clearfix">
-            //   {/* <button className="button is-small is-outlined is-link is-pulled-right"
-            //         > Extend Time </button> */}
-            //   <button className="button is-small is-outlined is-link is-pulled-right"
-            //     // onClick={}
-            //     > Cancel Now </button>
-                    
-            // </div>

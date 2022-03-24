@@ -10,17 +10,21 @@ export default function OnRenting() {
   const [{rentingBasket}, dispatch] = useStateValue();
   console.log("renting basket from OnRenting.js: ", rentingBasket); 
   // console.log(typeof (rentingBasket[0].cost))
+  
   const formatItemsCounter = items => {
     if (items === 0) return '';
     else if (items === 1) return "1 item";
     else return `${items} items`;
   }
+
+  // render the onrenting items in rentingBasket to OnRentingItem component
   const currentlyRentingItems = rentingBasket.map((item) => (
     <OnRentingItem
       key={item.id}
       {...item}
     />
   ));
+
   return(
     <div className='section'>
       <div className='container'>

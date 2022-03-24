@@ -24,10 +24,20 @@ const reducer = (state, action) => {
         ...state,
         rentingBasket: [...state.rentingBasket, action.item]
       };
-    case 'REMOVE_FROM_RENTING': // correct implement later
+    case 'REMOVE_FROM_RENTING':
+      const index = state.rentingBasket.findIndex(
+        (thisItem) => thisItem.id === action.id
+      );
+      let tempBasket = [...state.rentingBasket];
+      // console.log('tempBasket for cancel renting from reducer.js', tempBasket);
+      if (index >= 0) {
+        tempBasket.splice(index, 1);
+      } else {
+        console.warn('The item is not currently being rented to cancel!');
+      }
       return {
         ...state, 
-        rentingBasket: [...state.rentingBasket, action.item]
+        rentingBasket: tempBasket
       };
     default:
       return state;
