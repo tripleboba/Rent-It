@@ -1,6 +1,5 @@
 import React from "react"
-import { useStateValue, StateContext } from "../providers/StateProvider";
-import { useContext } from "react";
+import { useStateValue } from "../providers/StateProvider";
 /**
  * Item"s information
  * Act as each item"s page
@@ -8,27 +7,26 @@ import { useContext } from "react";
 
 export default function Item(props) {
   const {...item} = props;
-  const { addToRenting, rentingBasket } = useContext(StateContext);
 
   // handle 'rent-now' button to get the data of the item
-  // const [rentingBasket, dispatch] = useStateValue();
-  // console.log("renting basket from Item.js: ", rentingBasket);
-  // const addToRenting = () => {
-  //   // push item into the context layer
-  //   dispatch({
-  //     type: "ADD_TO_RENTING",
-  //     item: {
-  //       ...item
-  //       // id: item.id,
-  //       // image: item.image,
-  //       // title: item.title,
-  //       // description: item.description,
-  //       // cost: item.cost,
-  //       // isRenting: item.isRenting,
-  //       // rentTime: item.rentTime
-  //     },
-  //   });
-  // }
+  const [{rentingBasket}, dispatch] = useStateValue();
+  console.log("renting basket from Item.js: ", rentingBasket);
+  const addToRenting = () => {
+    // push item into the context layer
+    dispatch({
+      type: "ADD_TO_RENTING",
+      item: {
+        ...item
+        // id: item.id,
+        // image: item.image,
+        // title: item.title,
+        // description: item.description,
+        // cost: item.cost,
+        // isRenting: item.isRenting,
+        // rentTime: item.rentTime
+      },
+    });
+  }
   
   return (
 
@@ -36,7 +34,7 @@ export default function Item(props) {
       <div className="box">
         <div className="media">
           <div className="media-left">
-            <figure className="image is-64x64">
+            <figure className="image is-96x96">
               <img src={item.image} alt={item.title} />
             </figure>
           </div>
@@ -89,7 +87,9 @@ export default function Item(props) {
                     disabled> Rent Now </button>
                   ):(
                   <button className="button is-small is-outlined is-info is-pulled-right"
-                    onClick={()=>addToRenting(item)}> Rent Now </button>
+                    // onClick={()=>addToRenting(item)}
+                    onClick={addToRenting}
+                    > Rent Now </button>
                 )}
               </div>
             </div>

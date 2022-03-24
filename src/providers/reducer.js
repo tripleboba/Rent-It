@@ -11,7 +11,8 @@ export const initialState = {
 
 // selector helper
 export const getTotalRenting = rentingBasket => {
-  rentingBasket?.reduce((amount, item) => item.cost + amount, 0);
+  rentingBasket?.reduce(
+    (amount, item) => item.cost + amount, 0);
 }
 
 const reducer = (state, action) => {
