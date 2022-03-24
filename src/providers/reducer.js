@@ -32,8 +32,6 @@ const reducer = (state, action) => {
       // console.log('tempBasket for cancel renting from reducer.js', tempBasket);
       if (index >= 0) {
         tempBasket.splice(index, 1);
-      } else {
-        console.warn('The item is not currently being rented to cancel!');
       }
       return {
         ...state, 
