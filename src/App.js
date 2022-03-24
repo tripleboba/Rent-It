@@ -5,6 +5,8 @@ import Header from "./components/Header";
 import ItemsList from './components/ItemsList';
 import OnRenting from "./components/OnRenting";
 import RentedHistory from "./components/RentedHistory";
+// import ItemDetails from "./components/ItemDetails";
+import { StateProvider } from "./providers/StateProvider";
 // stylesheet
 import './styles/App.css';
 
@@ -30,24 +32,22 @@ export default function App(){
 //   render() {
 
     return (
-      // <div className="section">
-      //   <div className="container">
-      //     <h1 className="title"> Hello World </h1>
-      //     <p className="subtitle">
-      //       My React app  with <strong>Bulma</strong>
-      //     </p>
-      //   </div>
-      // </div>
-      <div className="App">
-        <Header />
-        <Router>
-          <Routes>
-            <Route path="/" element={<ItemsList items={items}/>} />
-            <Route path="/renting" element={<OnRenting items={items} />} />
-            <Route path="/rented" element={<RentedHistory />} />
-          </Routes>
-        </Router>
-      </div>
+
+      // <StateProvider>
+
+        <div className="App">
+          <Router>
+          <Header />
+            <Routes>
+              <Route path="/" element={<ItemsList items={items}/>} />
+              {/* <Route path="/items/:id" element={<ItemDetails />} /> */}
+              <Route path="/renting" element={<OnRenting items={items} />} />
+              <Route path="/rented" element={<RentedHistory />} />
+            </Routes>
+          </Router>
+        </div>
+
+      //</StateProvider>
     );
   }
   // }
