@@ -1,6 +1,12 @@
 import React from 'react'
 
 export default function ExtendTime(props) {
+
+  // handle dropdown select
+  const getSelectedHr = e => {
+    let extraHour = e.target.value;
+    console.log("selected extraHour from ExtendTime.js", extraHour);
+  }
   
   return (props.trigger) ? (
 
@@ -13,18 +19,19 @@ export default function ExtendTime(props) {
       </div>
 
       <div className="message-body">
-        <div class="field has-addons">
-          <div class="control is-expanded">
-            <div class="select is-fullwidth is-small is-rounded">
-              <select name="extraHour">
+        <div className="field has-addons">
+          <div className="control is-expanded">
+            <div className="select is-fullwidth is-small is-rounded">
+              <select name="extraHour"
+                onChange={getSelectedHr}>
                 <option value="0.5">30 mins</option>
                 <option value="1">1 hr</option>
                 <option value="2">2 hrs</option>
               </select>
             </div>
           </div>
-          <div class="control">
-            <button class="button is-success is-rounded is-small"
+          <div className="control">
+            <button className="button is-success is-rounded is-small"
               type="submit" 
               >Confirm</button>
           </div>

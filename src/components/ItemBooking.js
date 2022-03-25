@@ -9,8 +9,14 @@ import { useStateValue } from '../providers/StateProvider';
  */
 export default function ItemBooking(props) {
   // const {...item} = props;
-  console.log(useParams());
-  const {id} = useParams();
+  console.log("userParams from ItemBooking.js", useParams());
+  // const {id} = useParams();
+
+  // handle dropdown select
+  const getSelectedHr = e => {
+    let rentHour = e.target.value;
+    console.log("selected rentHour from ItemBooking.js", rentHour);
+  }
 
   // handle 'rent-now' button to get the data of the item
   // const [{rentingBasket}, dispatch] = useStateValue();
@@ -77,7 +83,10 @@ export default function ItemBooking(props) {
             <div className="container">
               <div className="is-clearfix mt-4">
                 <div className="select is-rounded is-pulled-left">
-                  <select name="extraHour">
+                  <select name="rentHour"
+                    // defaultValue={value}
+                    // onChange={(e) => rentHour(e.target.value)}
+                    onChange={getSelectedHr}>
                     <option value="0.5">30 mins</option>
                     <option value="1">1 hr</option>
                     <option value="2">2 hrs</option>
