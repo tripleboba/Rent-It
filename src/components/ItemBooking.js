@@ -23,19 +23,35 @@ export default function ItemBooking(props) {
   }
   const [{rentingBasket, allItems}, dispatch] = useStateValue();
   const addToRenting = () => {
-    // push item into the context layer
+    const itemsToUpdate = [...allItems];
+    // find the specific item in allItems
+    const foundIndex = itemsToUpdate.findIndex((i)=>{
+      return i.id === item.id
+    })
+    const itemToUpdate = {
+      ...item,
+      isRenting: true,
+      rentTime: rentHour,
+    }
+    itemsToUpdate[foundIndex] = itemToUpdate;
+
     dispatch({
       type: "ADD_TO_RENTING",
-      item: {
-        ...item,
-        // id: item.id,
-        // image: item.image,
-        // title: item.title,
-        // description: item.description,
-        // cost: item.cost,
-        isRenting: true,
-        rentTime: rentHour
-      },
+      item: itemToUpdate,
+      // item: {
+      //   ...item,
+      //   // id: item.id,
+      //   // image: item.image,
+      //   // title: item.title,
+      //   // description: item.description,
+      //   // cost: item.cost,
+      //   isRenting: true,
+      //   rentTime: rentHour,
+      // },
+    });
+    dispatch({
+      type: 'UPDATE_ITEMS',
+      items: itemsToUpdate,
     });
   }
   // handle 'rent-now' button to get the data of the item
