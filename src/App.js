@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import ItemsList from './components/ItemsList';
 import OnRenting from "./components/OnRenting";
+import ItemBooking from "./components/ItemBooking";
 import RentedHistory from "./components/RentedHistory";
 // stylesheet
 import './styles/App.css';
@@ -39,8 +40,8 @@ export default function App(){
             <Header />
             <Routes>
               <Route path="/" element={<ItemsList items={items}/>} />
-              {/* <Route path="/items/:id" element={<ItemDetails />} /> */}
               <Route path="/renting" element={<OnRenting />} />
+              <Route path="/items/:id" element={<ItemBooking />} />
               <Route path="/rented" element={<RentedHistory />} />
             </Routes>
           </Router>

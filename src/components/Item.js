@@ -1,4 +1,6 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import {Link} from 'react-router-dom';
+import ItemBooking from "./ItemBooking";
 import { useStateValue } from "../providers/StateProvider";
 // import Notification from "./Notification";
 /**
@@ -57,16 +59,19 @@ export default function Item(props) {
             </div>
             <div>{item.description}</div>
 
-            {/* ItemDetails component link */}
-            {/* <a  className="has-text-link" href={`/items/${item.id}`}>
-              <small>see more</small>
-            </a> */}
 
             {/* ------- */}
             <div className="container mt-3">
               <div className="is-clearfix">
 
                 <div className="field is-pulled-left">
+                  <Link className="button is-small is-outlined is-info is-pulled-right" to={`/items/${item.id}`}>Go To Booking</Link>
+                  {/* <button className="button is-small is-outlined is-info is-pulled-right">
+                    <Link to={`/items/${item.id}`}>Go To Booking</Link>
+                  </button> */}
+                </div>
+
+                {/* <div className="field is-pulled-left">
                   <p className="control"><small>Rent for: </small>
                     <span className="select is-small is-info">
                       {item.isRenting ? (
@@ -85,7 +90,7 @@ export default function Item(props) {
                       )}
                     </span>
                   </p>
-                </div>
+                </div> */}
                 {item.isRenting ? (
                   <button className="button is-small is-outlined is-link is-pulled-right"
                     disabled> Rent Now </button>
@@ -106,3 +111,8 @@ export default function Item(props) {
 
   );
 }
+
+{/* ItemDetails component link */}
+            {/* <a  className="has-text-link" href={`/items/${item.id}`}>
+              <small>see more</small>
+            </a> */}
