@@ -30,12 +30,10 @@ export default function Item(props) {
       },
     });
   }
-  // const [popupNoti, setPopupNoti] =  useState(false);
-  // console.log(popupNoti);
 
   return (
 
-    <div className=" column is-half">
+    <div className="column is-half">
       <div className="box">
         <div className="media">
           <div className="media-left">
@@ -62,10 +60,12 @@ export default function Item(props) {
 
             {/* ------- */}
             <div className="container mt-3">
-              <div className="is-clearfix">
+              {/* <div className="is-clearfix"> */}
 
-                <div className="field is-pulled-left">
-                  <Link className="button is-small is-outlined is-info is-pulled-right" to={`/items/${item.id}`}>Go To Booking</Link>
+                <div className="field is-pulled-right">
+                  <Link className="button is-small is-outlined is-info is-pulled-right"
+                    to={`/items/${item.id}`}>Go To Booking</Link>
+                    
                   {/* <button className="button is-small is-outlined is-info is-pulled-right">
                     <Link to={`/items/${item.id}`}>Go To Booking</Link>
                   </button> */}
@@ -97,22 +97,15 @@ export default function Item(props) {
                   ):(
                   <button className="button is-small is-outlined is-info is-pulled-right"
                     // onClick={()=>addToRenting(item)}
-                    // onClick={()=>setPopupNoti(true)}
                     onClick={addToRenting}
                     > Rent Now </button>
                 )}
-              </div>
+              {/* </div> */}
             </div>
           </div>
         </div>
       </div>
-      {/* <Notification trigger={popupNoti} setTrigger={setPopupNoti} /> */}
     </div>
 
   );
 }
-
-{/* ItemDetails component link */}
-            {/* <a  className="has-text-link" href={`/items/${item.id}`}>
-              <small>see more</small>
-            </a> */}
