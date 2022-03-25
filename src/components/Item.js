@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
 import { useStateValue } from "../providers/StateProvider";
+// import Notification from "./Notification";
 /**
  * Item"s information
  * Act as each item"s page
@@ -27,7 +28,9 @@ export default function Item(props) {
       },
     });
   }
-  
+  // const [popupNoti, setPopupNoti] =  useState(false);
+  // console.log(popupNoti);
+
   return (
 
     <div className=" column is-half">
@@ -69,14 +72,15 @@ export default function Item(props) {
                       {item.isRenting ? (
                         <select disabled>
                           <option selected>hrs</option>
-                          <option>30 mins</option>
+                          <option value="0">0 hrs</option>
                         </select>
                       ) : (
                         <select>
                           <option selected>hrs</option>
-                          <option>30 mins</option>
-                          <option>1 hr</option>
-                          <option>2 hrs</option>
+                          <option value="1">1 hr</option>
+                          <option value="2">2 hrs</option>
+                          <option value="3">3 hrs</option>
+                          <option value="4">4 hrs</option>
                         </select>
                       )}
                     </span>
@@ -88,6 +92,7 @@ export default function Item(props) {
                   ):(
                   <button className="button is-small is-outlined is-info is-pulled-right"
                     // onClick={()=>addToRenting(item)}
+                    // onClick={()=>setPopupNoti(true)}
                     onClick={addToRenting}
                     > Rent Now </button>
                 )}
@@ -96,6 +101,7 @@ export default function Item(props) {
           </div>
         </div>
       </div>
+      {/* <Notification trigger={popupNoti} setTrigger={setPopupNoti} /> */}
     </div>
 
   );

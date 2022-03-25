@@ -15,27 +15,23 @@ export default function Header() {
   }
 
   return (
-
-      <nav className="navbar" role="navigation" aria-label="main navigation">
-        
-        <div className="navbar-brand">
-            <Link className="navbar-item"
-                to="/">
-                {/* <img src={logo} alt="logo" width="auto" height="100%"/> */}
-                <strong>RENT IT</strong>
-            </Link>
-          {/* </div> */}
-        </div>
-        
-        <div className="navbar-end">
-            <Link className="navbar-item"
-                to="/renting"> On Renting {formatItemsCounter(rentingBasket.length)} </Link>
-            <Link className="navbar-item"
-                to="/rented"> Rented History </Link>
-            <div className="navbar-item"> Signup/Login </div>
-        </div>
-
-      </nav>
-
+    <nav className="navbar" role="navigation" aria-label="main navigation">
+      <div className="navbar-brand">
+          <Link className="navbar-item"
+              to="/">
+              {/* <img src={logo} alt="logo" width="auto" height="100%"/> */}
+              <strong >RENT IT</strong>
+          </Link>
+        {/* </div> */}
+      </div>
+      
+      <div className="navbar-end">
+          <Link className="navbar-item"
+              to="/renting"> On Renting {formatItemsCounter(rentingBasket.length)} </Link>
+          <Link className="navbar-item"
+              to="/rented"> Rented History </Link>
+          <div className="navbar-item"> Signup/Login </div>
+      </div>
+    </nav>
   )
 }

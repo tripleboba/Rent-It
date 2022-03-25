@@ -8,6 +8,15 @@ export default function ItemDetails() {
   return (
     <div className='section'>
       <div className='title is-4'>Item {id} Details</div>
+      <div class="columns">
+        <div class="column">Rent starting time</div>
+        <div class="is-divider-vertical" data-content="TO"></div>
+        <div class="column">
+          Rent ending time <br/>
+          Note: divider stretches to parent's height.
+        </div>
+      </div>
+
     </div>
   )
 }

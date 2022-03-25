@@ -5,8 +5,6 @@ import Header from "./components/Header";
 import ItemsList from './components/ItemsList';
 import OnRenting from "./components/OnRenting";
 import RentedHistory from "./components/RentedHistory";
-// import ItemDetails from "./components/ItemDetails";
-import { StateProvider } from "./providers/StateProvider";
 // stylesheet
 import './styles/App.css';
 
@@ -36,9 +34,6 @@ export default function App(){
 //   render() {
 
     return (
-
-      // <StateProvider>
-
         <div className="App">
           <Router>
             <Header />
@@ -50,8 +45,6 @@ export default function App(){
             </Routes>
           </Router>
         </div>
-
-      //</StateProvider>
     );
   }
-  // }
+
