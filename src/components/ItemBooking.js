@@ -13,8 +13,10 @@ export default function ItemBooking(props) {
   // const {id} = useParams();
 
   // handle dropdown select
+  const [rentHour, setRentHour] = useState(0);
   const getSelectedHr = e => {
-    let rentHour = e.target.value;
+    setRentHour(e.target.value);
+    // rentHour = e.target.value;
     console.log("selected rentHour from ItemBooking.js", rentHour);
   }
 
@@ -38,7 +40,7 @@ export default function ItemBooking(props) {
   //   });
   // }
 
-  const item = {id: 4, title:"chick tripper", description:"🔞 parental advisory", isRenting:false, cost: 250,image:"https://media.giphy.com/media/U18af5l5Xzdxm/giphy.gif", rentTime:3}
+  const item = {id: 4, title:"chick tripper", description:"🔞 parental advisory", isRenting:false, cost: 250,image:"https://media.giphy.com/media/U18af5l5Xzdxm/giphy.gif",}
   return (
     <div className='section'>
       {/* <div><small>booking item {id} </small></div> */}
@@ -71,14 +73,17 @@ export default function ItemBooking(props) {
               <div className="container mt-4">{item.description}</div>
             </div>
             <div className="container mt-4">
-              <strong>Receipt</strong>
+              <strong>----Receipt----</strong>
               <p>
                 Renting cost per hour: ${item.cost}
               </p>
               <p>
-                Item will be rent for {item.rentTime} hours.
+                Item will be rent for {rentHour} hours.
               </p>
-              <p>Total: ${item.cost * item.rentTime}</p>
+              <p>
+                Fee: $0.3
+              </p>
+              <strong>Total: ${item.cost * rentHour * 0.3}</strong>
             </div>
             <div className="container">
               <div className="is-clearfix mt-4">

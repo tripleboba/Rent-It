@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 export default function ExtendTime(props) {
 
   // handle dropdown select
+  const [extraHour, setExtraHour] = useState(0);
   const getSelectedHr = e => {
-    let extraHour = e.target.value;
+    setExtraHour(e.target.value);
     console.log("selected extraHour from ExtendTime.js", extraHour);
   }
   
@@ -19,6 +20,17 @@ export default function ExtendTime(props) {
       </div>
 
       <div className="message-body">
+        
+        {extraHour ? (
+          <div className="container mb-3">
+            <p>---Receipt---</p>
+            <p>Remaining Hour: put here hrs</p>
+            <p>Add: {extraHour} more hours</p>
+            <p>New Renting Time: ({extraHour} + remaining_hour) hours</p>
+            <p>New Total: {extraHour} * renting_cost + $0.3 fee</p>
+          </div>
+
+        ): <></>}
         <div className="field has-addons">
           <div className="control is-expanded">
             <div className="select is-fullwidth is-small is-rounded">
