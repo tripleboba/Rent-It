@@ -6,6 +6,8 @@ import { useStateValue } from '../providers/StateProvider';
  *  display chosen time
  *  display renting cost
  *  confirm to add item to OnRenting
+ * for db api
+ * note use query to select the item using id
  */
 export default function ItemBooking(props) {
   // const {...item} = props;
@@ -19,7 +21,23 @@ export default function ItemBooking(props) {
     // rentHour = e.target.value;
     console.log("selected rentHour from ItemBooking.js", rentHour);
   }
-
+  const [{rentingBasket, allItems}, dispatch] = useStateValue();
+  const addToRenting = () => {
+    // push item into the context layer
+    dispatch({
+      type: "ADD_TO_RENTING",
+      item: {
+        ...item,
+        // id: item.id,
+        // image: item.image,
+        // title: item.title,
+        // description: item.description,
+        // cost: item.cost,
+        isRenting: true,
+        rentTime: rentHour
+      },
+    });
+  }
   // handle 'rent-now' button to get the data of the item
   // const [{rentingBasket}, dispatch] = useStateValue();
   // console.log("renting basket from ItemBooking.js: ", rentingBasket);
@@ -40,7 +58,13 @@ export default function ItemBooking(props) {
   //   });
   // }
 
-  const item = {id: 4, title:"chick tripper", description:"🔞 parental advisory", isRenting:false, cost: 250,image:"https://media.giphy.com/media/U18af5l5Xzdxm/giphy.gif",}
+  // because the redirect is using Link -> use this to find the item
+  const {id } = useParams()
+  const item = allItems.find((selectItem)=>{ return Number(selectItem.id) === Number(id) })
+  console.log('id here',id);
+  console.log('item here',item);
+  // keep it find item down here after the addToRenting (shouldn't have bug just to make sure ^)
+  
   return (
     <div className='section'>
       {/* <div><small>booking item {id} </small></div> */}
@@ -89,9 +113,10 @@ export default function ItemBooking(props) {
               <div className="is-clearfix mt-4">
                 <div className="select is-rounded is-pulled-left">
                   <select name="rentHour"
-                    // defaultValue={value}
+                    defaultValue={rentHour}
                     // onChange={(e) => rentHour(e.target.value)}
                     onChange={getSelectedHr}>
+                    <option value="0">select time</option>
                     <option value="0.5">30 mins</option>
                     <option value="1">1 hr</option>
                     <option value="2">2 hrs</option>
@@ -100,8 +125,8 @@ export default function ItemBooking(props) {
                   </select>
                 </div>
                 <button className="button is-info is-outlined is-rounded is-pulled-right"
-                  // onClick={addToRenting}
-                  disabled
+                  onClick={addToRenting}
+                  // disabled
                   >Rent Now</button>
               </div>
 
