@@ -12,7 +12,7 @@ export const initialState = {
   rentingBasket:[],
 };
 
-// selector helper
+// selector helper - not working!
 export const getTotalRenting = rentingBasket => {
   rentingBasket?.reduce(
     (amount, item) => item.cost + amount, 0);

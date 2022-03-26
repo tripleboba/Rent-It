@@ -66,10 +66,6 @@ export default function Item(props) {
                 <div className="field is-pulled-right">
                   <Link className="button is-small is-outlined is-info is-pulled-right"
                     to={`/items/${item.id}`}>Go To Booking</Link>
-                    
-                  {/* <button className="button is-small is-outlined is-info is-pulled-right">
-                    <Link to={`/items/${item.id}`}>Go To Booking</Link>
-                  </button> */}
                 </div>
 
                 {/* <div className="field is-pulled-left">

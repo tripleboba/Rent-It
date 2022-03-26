@@ -6,9 +6,14 @@ import { useStateValue } from '../providers/StateProvider';
  *  display chosen time
  *  display renting cost
  *  confirm to add item to OnRenting
- * for db api
+ * 
+ * --- SELF NOTE ---
+ * for db api (need to add axios)
  * note use query to select the item using id
+ * here is already handle in-memory db
+ * recommended db: JSON server (no create table), backend -> external db
  */
+
 export default function ItemBooking(props) {
   // const {...item} = props;
   console.log("userParams from ItemBooking.js", useParams());
@@ -40,15 +45,12 @@ export default function ItemBooking(props) {
       item: itemToUpdate,
       // item: {
       //   ...item,
-      //   // id: item.id,
-      //   // image: item.image,
-      //   // title: item.title,
-      //   // description: item.description,
-      //   // cost: item.cost,
       //   isRenting: true,
       //   rentTime: rentHour,
       // },
     });
+    // axios -> change server
+    // dispath -> changing state in the browser
     dispatch({
       type: 'UPDATE_ITEMS',
       items: itemsToUpdate,
@@ -83,8 +85,6 @@ export default function ItemBooking(props) {
   
   return (
     <div className='section'>
-      {/* <div><small>booking item {id} </small></div> */}
-      {/* <div className='title is-4'>Item {id} Details</div> */}
 
       <div className='container'>
         <div className="columns">
@@ -140,9 +140,11 @@ export default function ItemBooking(props) {
                     <option value="4">4 hrs</option>
                   </select>
                 </div>
+
                 <button className="button is-info is-outlined is-rounded is-pulled-right"
                   onClick={addToRenting}
-                  // disabled
+                  // unable the button when item is rented 
+                  disabled={item.isRenting}
                   >Rent Now</button>
               </div>
 
