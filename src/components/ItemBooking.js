@@ -15,10 +15,6 @@ import { useStateValue } from '../providers/StateProvider';
  */
 
 export default function ItemBooking(props) {
-  // const {...item} = props;
-  console.log("userParams from ItemBooking.js", useParams());
-  // const {id} = useParams();
-
   // handle dropdown select
   const [rentHour, setRentHour] = useState(0);
   const getSelectedHr = e => {
@@ -79,8 +75,8 @@ export default function ItemBooking(props) {
   // because the redirect is using Link -> use this to find the item
   const {id } = useParams()
   const item = allItems.find((selectItem)=>{ return Number(selectItem.id) === Number(id) })
-  console.log('id here',id);
-  console.log('item here',item);
+  console.log("item's id get from useParams from ItemBooking.js", useParams());
+  console.log('item being added from ItemBooking.js',item);
   // keep it find item down here after the addToRenting (shouldn't have bug just to make sure ^)
   
   return (
