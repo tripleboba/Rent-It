@@ -52,25 +52,6 @@ export default function ItemBooking(props) {
       items: itemsToUpdate,
     });
   }
-  // handle 'rent-now' button to get the data of the item
-  // const [{rentingBasket}, dispatch] = useStateValue();
-  // console.log("renting basket from ItemBooking.js: ", rentingBasket);
-  // const addToRenting = () => {
-  //   // push item into the context layer
-  //   dispatch({
-  //     type: "ADD_TO_RENTING",
-  //     item: {
-  //       ...item
-  //       // id: item.id,
-  //       // image: item.image,
-  //       // title: item.title,
-  //       // description: item.description,
-  //       // cost: item.cost,
-  //       // isRenting: item.isRenting,
-  //       // rentTime: item.rentTime
-  //     },
-  //   });
-  // }
 
   // because the redirect is using Link -> use this to find the item
   const {id } = useParams()
