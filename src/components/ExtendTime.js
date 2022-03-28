@@ -74,9 +74,9 @@ export default function ExtendTime(props) {
                 defaultValue={extendedHour}
                 onChange={getSelectedHr}>
                 <option value="0">select time</option>
-                <option value="0.5">30 mins</option>
                 <option value="1">1 hr</option>
                 <option value="2">2 hrs</option>
+                <option value="3">3 hrs</option>
               </select>
             </div>
           </div>

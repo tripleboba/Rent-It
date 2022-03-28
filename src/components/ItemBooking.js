@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useStateValue } from '../providers/StateProvider';
+import { format } from "date-fns";
 /**
  * Booking component
  *  display chosen time
@@ -92,13 +93,14 @@ export default function ItemBooking(props) {
               <div className="container mt-4">{item.description}</div>
             </div>
             <div className="container mt-4">
-              <strong>----Receipt----</strong>
+              <strong>----Price Quote----</strong>
               <p>
-                Renting cost per hour: ${item.cost}
+                {/* Renting cost per hour: ${item.cost} */}
               </p>
               <p>
-                Item will be rent for {rentPeriod} hours.
-                From {Date()} to 
+                Item will be rent for <strong>{rentPeriod}</strong> hours.<br></br>
+                <strong>FROM&ensp;</strong> {format(Date.now(), "hh:mm a - MMM dd, yyyy")}<br></br>
+                <strong>TO&ensp;&ensp;&ensp;&ensp;</strong> {format(new Date().setHours(new Date().getHours() + Number(rentPeriod)), "hh:mm a - MMM dd, yyyy")}
               </p>
               <p>
                 Fee: $0.3
@@ -112,15 +114,13 @@ export default function ItemBooking(props) {
                     defaultValue={rentPeriod}
                     // onChange={(e) => rentPeriod(e.target.value)}
                     onChange={getSelectedHr}>
-                    <option value="">select time</option>
-                    <option value="0.5">30 mins</option>
+                    <option value="0">select time</option>
                     <option value="1">1 hr</option>
                     <option value="2">2 hrs</option>
                     <option value="3">3 hrs</option>
                     <option value="4">4 hrs</option>
                   </select>
                 </div>
-
                 <button className="button is-info is-outlined is-rounded is-pulled-right"
                   onClick={addToRenting}
                   // unable the button when item is rented 
