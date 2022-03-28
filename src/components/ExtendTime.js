@@ -1,15 +1,46 @@
 import React, { useState } from 'react';
+import { useStateValue } from '../providers/StateProvider';
+import { useParams } from 'react-router-dom'
 
 // should go to the server -> go back notification -> match up all the renting time -> setTimeOut
 
 export default function ExtendTime(props) {
-
+  const {item} = props;
+  
   // handle dropdown select
-  const [extraHour, setExtraHour] = useState(0);
+  const [extendedHour, setExtraHour] = useState(0);
   const getSelectedHr = e => {
     setExtraHour(e.target.value);
-    console.log("selected extraHour from ExtendTime.js", extraHour);
+    console.log("selected extendedHour from ExtendTime.js", extendedHour);
   }
+  
+  // handle extending time
+  console.log('item being chosen to extend renting time from ExtendTime.js', item);
+  const [{rentingBasket, allItems}, dispatch] = useStateValue();
+  // get the extending item's id and renting coist from the rentingBasket
+  // get the remaining hour from the allItems
+  // use Date obj take the current time (POST request that grab the time now - rented time )
+
+
+  // const updateRentingTime = () => {
+  //   const itemsToUpdate = [...allItems];
+  //   const foundIndex = itemsToUpdate.findIndex((i)=>{
+  //     return i.id === item.id
+  //   })
+  //   const itemToUpdate = {
+  //     ...item,
+  //     isRenting: false,
+  //     rentTime: 0,
+  //   }
+  //   itemsToUpdate[foundIndex] = itemToUpdate;
+
+  //   // then update its renting status
+  //   dispatch({
+  //     type: 'UPDATE_ITEMS',
+  //     items: itemsToUpdate,
+  //   });
+  // }
+
 
 /** click on confirm -> update
   * just the rentingBasket (same logic with allItems dispatch -> get id -> find index of the obj -> dispatch with updated [])
@@ -26,21 +57,23 @@ export default function ExtendTime(props) {
 
       <div className="message-body">
         
-        {extraHour ? (
+        {extendedHour ? (
           <div className="container mb-3">
-            <p>---Receipt---</p>
+            <strong>---Price Quote---</strong>
             <p>Remaining Hour: put here hrs</p>
-            <p>Add: {extraHour} more hours</p>
-            <p>New Renting Time: ({extraHour} + remaining_hour) hours</p>
-            <p>New Total: {extraHour} * renting_cost + $0.3 fee</p>
+            <p>Add: {extendedHour} more hours</p>
+            <p>New Renting Time: ({extendedHour} + remaining_hour) hours</p>
+            <p>New Total: ({extendedHour} * {item.cost}) + $0.3 fee</p>
           </div>
 
-        ): <></>}
+        ): ""}
         <div className="field has-addons">
           <div className="control is-expanded">
             <div className="select is-fullwidth is-small is-rounded">
-              <select name="extraHour"
+              <select name="extendedHour"
+                defaultValue={extendedHour}
                 onChange={getSelectedHr}>
+                <option value="0">select time</option>
                 <option value="0.5">30 mins</option>
                 <option value="1">1 hr</option>
                 <option value="2">2 hrs</option>

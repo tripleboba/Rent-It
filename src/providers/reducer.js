@@ -10,6 +10,7 @@ export const initialState = {
   allItems:[...items],
   selectedItem:{},
   rentingBasket:[],
+  rentedBasket: [],
 };
 
 // selector helper - not working!
@@ -26,11 +27,6 @@ const reducer = (state, action) => {
       return{
         ...state,
         allItems: [...action.items]
-      };
-    case 'SET_SELECTED_ITEM':
-      return{
-        ...state,
-        selectedItem: {...action.item}
       };
     case 'ADD_TO_RENTING':
       return{

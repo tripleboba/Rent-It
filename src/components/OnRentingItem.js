@@ -63,7 +63,7 @@ export default function OnRentingItem(props) {
             <div className="column"><small><b>Start time</b></small></div>
             <div className="column"><small><b>End time</b></small></div>
           </div> */}
-          <small>Counter</small>
+          {/* <small>Counter</small> */}
         
           {/* Button and Extend Time form */}
           <div className="buttons has-addons is-small is-right">
@@ -76,7 +76,7 @@ export default function OnRentingItem(props) {
               >End</button>
           </div>
         </div>
-        <ExtendTime trigger={extendTimeNoti} setTrigger={setExtendTimeNoti} />
+        <ExtendTime trigger={extendTimeNoti} setTrigger={setExtendTimeNoti} item={item} />
       
       </div>
     </div>

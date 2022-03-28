@@ -16,13 +16,14 @@ import { useStateValue } from '../providers/StateProvider';
 
 export default function ItemBooking(props) {
   // handle dropdown select
-  const [rentHour, setRentHour] = useState(0);
+  const [rentPeriod, setRentHour] = useState(0);
   const getSelectedHr = e => {
     setRentHour(e.target.value);
-    // rentHour = e.target.value;
-    console.log("selected rentHour from ItemBooking.js", rentHour);
+    // rentPeriod = e.target.value;
+    console.log("selected rentPeriod from ItemBooking.js", rentPeriod);
   }
   const [{rentingBasket, allItems}, dispatch] = useStateValue();
+  
   const addToRenting = () => {
     const itemsToUpdate = [...allItems];
     // find the specific item in allItems
@@ -32,7 +33,8 @@ export default function ItemBooking(props) {
     const itemToUpdate = {
       ...item,
       isRenting: true,
-      rentTime: rentHour,
+      startTime: Date.now(),
+      rentPeriod: rentPeriod,
     }
     itemsToUpdate[foundIndex] = itemToUpdate;
 
@@ -42,7 +44,7 @@ export default function ItemBooking(props) {
       // item: {
       //   ...item,
       //   isRenting: true,
-      //   rentTime: rentHour,
+      //   rentPeriod: rentPeriod,
       // },
     });
     // axios -> change server
@@ -57,7 +59,7 @@ export default function ItemBooking(props) {
   const {id } = useParams()
   const item = allItems.find((selectItem)=>{ return Number(selectItem.id) === Number(id) })
   console.log("item's id get from useParams from ItemBooking.js", useParams());
-  console.log('item being added from ItemBooking.js',item);
+  console.log('item being selected from ItemBooking.js',item);
   // keep it find item down here after the addToRenting (shouldn't have bug just to make sure ^)
   
   return (
@@ -95,21 +97,22 @@ export default function ItemBooking(props) {
                 Renting cost per hour: ${item.cost}
               </p>
               <p>
-                Item will be rent for {rentHour} hours.
+                Item will be rent for {rentPeriod} hours.
+                From {Date()} to 
               </p>
               <p>
                 Fee: $0.3
               </p>
-              <strong>Total: ${item.cost * rentHour * 0.3}</strong>
+              <strong>Total: ${item.cost * rentPeriod * 0.3}</strong>
             </div>
             <div className="container">
               <div className="is-clearfix mt-4">
                 <div className="select is-rounded is-pulled-left">
-                  <select name="rentHour"
-                    defaultValue={rentHour}
-                    // onChange={(e) => rentHour(e.target.value)}
+                  <select name="rentPeriod"
+                    defaultValue={rentPeriod}
+                    // onChange={(e) => rentPeriod(e.target.value)}
                     onChange={getSelectedHr}>
-                    <option value="0">select time</option>
+                    <option value="">select time</option>
                     <option value="0.5">30 mins</option>
                     <option value="1">1 hr</option>
                     <option value="2">2 hrs</option>
