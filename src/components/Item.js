@@ -48,7 +48,7 @@ export default function Item(props) {
                 <b className="pr-2" style={{ textTransform: "capitalize" }}>{item.title}</b>
                 <div className="tag is-warning is-rounded">
                   <CurrencyFormat
-                    renderTex={(value) => ({value})}
+                    // renderTex={(value) => ({value})}
                     decimalScale={2}
                     value={item.cost}
                     displayType={"text"}

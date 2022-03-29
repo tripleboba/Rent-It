@@ -50,7 +50,11 @@ export default function ExtendTime(props) {
     <article className="message is-warning is-small">
       <div className="message-header"> <p>Exend Renting It For</p>
         <button className="delete" aria-label="delete"
-          onClick={() => props.setTrigger(false)}
+          onClick={() => {
+              props.setTrigger(false);
+              setExtraHour(0);
+            }
+          }
           ></button>
         {props.children}
       </div>

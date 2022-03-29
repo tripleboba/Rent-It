@@ -24,6 +24,17 @@ export default function ItemBooking(props) {
     // rentPeriod = e.target.value;
     console.log("selected rentPeriod from ItemBooking.js", rentPeriod);
   }
+
+  // calculate endTime of the item
+  const endTime = (startTime, rentPeriod) => {
+    // new Date().setHours(new Date().getHours() + Number(rentPeriod))
+    return new Date(startTime.setHours(startTime.getHours() + Number(rentPeriod)));
+  };
+  const timeFormatDisplay = (t) => {
+    return format(t, "hh:mm a - MMM dd, yyyy");
+  }
+
+  // handle button actions
   const [{rentingBasket, allItems}, dispatch] = useStateValue();
   
   const addToRenting = () => {
@@ -32,11 +43,14 @@ export default function ItemBooking(props) {
     const foundIndex = itemsToUpdate.findIndex((i)=>{
       return i.id === item.id
     })
+    const startTime = new Date();
     const itemToUpdate = {
       ...item,
       isRenting: true,
-      startTime: Date.now(),
+      // startTime: new Date(),
+      startTime: startTime,
       rentPeriod: rentPeriod,
+      endTime: endTime(startTime, rentPeriod),
     }
     itemsToUpdate[foundIndex] = itemToUpdate;
 
@@ -83,7 +97,7 @@ export default function ItemBooking(props) {
                   <b className='title is-4 pr-3' style={{ textTransform: "capitalize" }}>{item.title}</b>
                   <div className="tag is-warning is-rounded">
                     <CurrencyFormat
-                      renderTex={(value) => ({value})}
+                      // renderTex={(value) => ({value})}
                       decimalScale={2}
                       value={item.cost}
                       displayType={"text"}
@@ -110,8 +124,8 @@ export default function ItemBooking(props) {
                 </p>
                 <p>
                   Item will be rent for <strong>{rentPeriod}</strong> hours.<br></br>
-                  <strong>FROM&ensp;</strong> {format(Date.now(), "hh:mm a - MMM dd, yyyy")}<br></br>
-                  <strong>TO&ensp;&ensp;&ensp;&ensp;</strong> {format(new Date().setHours(new Date().getHours() + Number(rentPeriod)), "hh:mm a - MMM dd, yyyy")}
+                  <strong>FROM&ensp;</strong> {timeFormatDisplay(new Date())}<br></br>
+                  <strong>TO&ensp;&ensp;&ensp;&ensp;</strong> {timeFormatDisplay(endTime(new Date(), rentPeriod))}
                 </p>
               </div>
               <div className='is-clearfix mt-4'>
@@ -121,7 +135,7 @@ export default function ItemBooking(props) {
                 <div className='field is-pulled-left'>
                   <strong>Total: </strong>
                   <CurrencyFormat
-                    renderTex={(value) => ({value})}
+                    // renderTex={(value) => ({value})}
                     decimalScale={2}
                     value={(item.cost * rentPeriod) + 0.3}
                     displayType={"text"}
@@ -140,7 +154,7 @@ export default function ItemBooking(props) {
                   <select name="rentPeriod"
                     defaultValue={rentPeriod}
                     // onChange={(e) => rentPeriod(e.target.value)}
-                    onChange={getSelectedHr}>
+                    onChange={getSelectedHr} disabled={item.isRenting}>
                     <option value="0">select time</option>
                     <option value="1">1 hr</option>
                     <option value="2">2 hrs</option>
