@@ -34,9 +34,9 @@ export default function ItemBooking(props) {
   const timeFormatDisplay = (t) => {
     return format(t, "hh:mm a - MMM dd, yyyy");
   }
-  const rentForFormat = (rentPeriod) => {
-    if (rentPeriod === 0) return '';
-    else if (rentPeriod === 1) return 'hour';
+  const displayHrFormat = (rentPeriod) => {
+    if (Number(rentPeriod) === 0) return '';
+    else if (Number(rentPeriod) === 1) return 'hour';
     else return 'hours';
   }
 
@@ -122,7 +122,8 @@ export default function ItemBooking(props) {
               <div className='container'>
                 <strong>----Price Quote----</strong>
                 <p>
-                  Item will be rent for <strong>{rentPeriod}</strong> {rentForFormat(rentPeriod)}.<br></br>
+                  Item will be rent for <strong>{rentPeriod}</strong> {displayHrFormat
+              (rentPeriod)}.<br></br>
                   <strong>FROM&ensp;</strong> {timeFormatDisplay(new Date())}<br></br>
                   <strong>TO&ensp;&ensp;&ensp;&ensp;</strong> {timeFormatDisplay(calculateEndTime(new Date(), rentPeriod))}
                 </p>

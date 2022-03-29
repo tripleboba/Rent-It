@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useStateValue } from '../providers/StateProvider';
-
+import { format } from "date-fns";
 // should go to the server -> go back notification -> match up all the renting time -> setTimeOut
 
 export default function ExtendTime(props) {
@@ -11,6 +11,10 @@ export default function ExtendTime(props) {
   const getSelectedHr = e => {
     setExtraHour(e.target.value);
     // console.log("selected extendedHour from ExtendTime.js", extendedHour);
+  }
+
+  const timeFormatDisplay = (t) => {
+    return format(t, "hh:mm a - MMM dd, yyyy");
   }
   
   // handle extending time
@@ -63,8 +67,8 @@ export default function ExtendTime(props) {
         {extendedHour ? (
           <div className="container mb-3">
             <strong>---Price Quote---</strong>
-            <p>Start: {item.startTime.toString()}</p>
-            <p>End: {item.endTime.toString()}</p>
+            <p>Start: {timeFormatDisplay(item.startTime)}</p>
+            <p>End: {timeFormatDisplay(item.endTime)}</p>
             <br></br>
             <p>Add: {extendedHour} more hours</p>
             <p>New Renting Time: ({extendedHour} + remaining_hour) hours</p>
