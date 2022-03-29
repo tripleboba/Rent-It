@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useStateValue } from '../providers/StateProvider';
 import { format } from "date-fns";
+import CurrencyFormat from 'react-currency-format';
 /**
  * Booking component
  *  display chosen time
@@ -80,7 +81,16 @@ export default function ItemBooking(props) {
               <div className="is-clearfix">
                 <div className="field is-pulled-left">
                   <b className='title is-4 pr-3' style={{ textTransform: "capitalize" }}>{item.title}</b>
-                  <div className="tag is-warning is-rounded">${item.cost}/hr </div>
+                  <div className="tag is-warning is-rounded">
+                    <CurrencyFormat
+                      renderTex={(value) => ({value})}
+                      decimalScale={2}
+                      value={item.cost}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={"CAD $"}
+                    />/hr
+                  </div>
                 </div>
                 <div className="field is-pulled-right">
                   {item.isRenting ? (
@@ -93,22 +103,39 @@ export default function ItemBooking(props) {
               <div className="container mt-4">{item.description}</div>
             </div>
             <div className="container mt-4">
-              <strong>----Price Quote----</strong>
-              <p>
-                {/* Renting cost per hour: ${item.cost} */}
-              </p>
-              <p>
-                Item will be rent for <strong>{rentPeriod}</strong> hours.<br></br>
-                <strong>FROM&ensp;</strong> {format(Date.now(), "hh:mm a - MMM dd, yyyy")}<br></br>
-                <strong>TO&ensp;&ensp;&ensp;&ensp;</strong> {format(new Date().setHours(new Date().getHours() + Number(rentPeriod)), "hh:mm a - MMM dd, yyyy")}
-              </p>
-              <p>
-                Fee: $0.3
-              </p>
-              <strong>Total: ${item.cost * rentPeriod * 0.3}</strong>
+              <div className='container'>
+                <strong>----Price Quote----</strong>
+                <p>
+                  {/* Renting cost per hour: ${item.cost} */}
+                </p>
+                <p>
+                  Item will be rent for <strong>{rentPeriod}</strong> hours.<br></br>
+                  <strong>FROM&ensp;</strong> {format(Date.now(), "hh:mm a - MMM dd, yyyy")}<br></br>
+                  <strong>TO&ensp;&ensp;&ensp;&ensp;</strong> {format(new Date().setHours(new Date().getHours() + Number(rentPeriod)), "hh:mm a - MMM dd, yyyy")}
+                </p>
+              </div>
+              <div className='is-clearfix mt-4'>
+                <p>
+                  Service fee: $0.3
+                </p>
+                <div className='field is-pulled-left'>
+                  <strong>Total: </strong>
+                  <CurrencyFormat
+                    renderTex={(value) => ({value})}
+                    decimalScale={2}
+                    value={(item.cost * rentPeriod) + 0.3}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"CAD $"}
+                  />
+                </div>
+                <div className='field is-pulled-right'>payment api</div>
+              </div>
             </div>
+            
+            {/* Buttons section */}
             <div className="container">
-              <div className="is-clearfix mt-4">
+              <div className="is-clearfix">
                 <div className="select is-rounded is-pulled-left">
                   <select name="rentPeriod"
                     defaultValue={rentPeriod}
@@ -127,8 +154,8 @@ export default function ItemBooking(props) {
                   disabled={item.isRenting}
                   >Rent Now</button>
               </div>
-
             </div>
+            
           </div>
         </div>
 

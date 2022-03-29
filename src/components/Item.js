@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {Link} from 'react-router-dom';
 import ItemBooking from "./ItemBooking";
 import { useStateValue } from "../providers/StateProvider";
+import CurrencyFormat from "react-currency-format";
 // import Notification from "./Notification";
 /**
  * Item"s information
@@ -45,7 +46,16 @@ export default function Item(props) {
             <div className="is-clearfix">
               <div className="field is-pulled-left">
                 <b className="pr-2" style={{ textTransform: "capitalize" }}>{item.title}</b>
-                <div className="tag is-warning is-rounded">${item.cost}/hr </div>
+                <div className="tag is-warning is-rounded">
+                  <CurrencyFormat
+                    renderTex={(value) => ({value})}
+                    decimalScale={2}
+                    value={item.cost}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    prefix={"CAD $"}
+                  />/hr
+                  </div>
               </div>
               <div className="field is-pulled-right">
                 {item.isRenting ? (
