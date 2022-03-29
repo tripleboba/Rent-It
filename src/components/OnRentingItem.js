@@ -20,7 +20,9 @@ export default function OnRentingItem(props) {
     const itemToUpdate = {
       ...item,
       isRenting: false,
-      rentTime: 0,
+      rentPeriod: null,
+      startTime: null, 
+      endTime: null,
     }
     itemsToUpdate[foundIndex] = itemToUpdate;
 

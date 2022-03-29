@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useStateValue } from '../providers/StateProvider';
-import { useParams } from 'react-router-dom'
 
 // should go to the server -> go back notification -> match up all the renting time -> setTimeOut
 
@@ -11,7 +10,7 @@ export default function ExtendTime(props) {
   const [extendedHour, setExtraHour] = useState(0);
   const getSelectedHr = e => {
     setExtraHour(e.target.value);
-    console.log("selected extendedHour from ExtendTime.js", extendedHour);
+    // console.log("selected extendedHour from ExtendTime.js", extendedHour);
   }
   
   // handle extending time
@@ -64,7 +63,9 @@ export default function ExtendTime(props) {
         {extendedHour ? (
           <div className="container mb-3">
             <strong>---Price Quote---</strong>
-            <p>Remaining Hour: put here hrs</p>
+            <p>Start: {item.startTime.toString()}</p>
+            <p>End: {item.endTime.toString()}</p>
+            <br></br>
             <p>Add: {extendedHour} more hours</p>
             <p>New Renting Time: ({extendedHour} + remaining_hour) hours</p>
             <p>New Total: ({extendedHour} * {item.cost}) + $0.3 fee</p>

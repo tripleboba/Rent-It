@@ -18,20 +18,26 @@ import CurrencyFormat from 'react-currency-format';
 
 export default function ItemBooking(props) {
   // handle dropdown select
-  const [rentPeriod, setRentHour] = useState(0);
+  const [rentPeriod, setRentHour] = useState(null);
   const getSelectedHr = e => {
     setRentHour(e.target.value);
-    // rentPeriod = e.target.value;
-    console.log("selected rentPeriod from ItemBooking.js", rentPeriod);
+    // console.log the previous selected value
+    // console.log("selected rentPeriod from ItemBooking.js", rentPeriod);
   }
 
   // calculate endTime of the item
-  const endTime = (startTime, rentPeriod) => {
-    // new Date().setHours(new Date().getHours() + Number(rentPeriod))
-    return new Date(startTime.setHours(startTime.getHours() + Number(rentPeriod)));
+  const calculateEndTime = (startTime, rentPeriod) => {
+    const endTime = new Date(startTime.getTime());  // won't be interferred the currentTime when calculate
+    endTime.setHours(startTime.getHours() + Number(rentPeriod));
+    return endTime;
   };
   const timeFormatDisplay = (t) => {
     return format(t, "hh:mm a - MMM dd, yyyy");
+  }
+  const rentForFormat = (rentPeriod) => {
+    if (rentPeriod === 0) return '';
+    else if (rentPeriod === 1) return 'hour';
+    else return 'hours';
   }
 
   // handle button actions
@@ -43,25 +49,21 @@ export default function ItemBooking(props) {
     const foundIndex = itemsToUpdate.findIndex((i)=>{
       return i.id === item.id
     })
+    
     const startTime = new Date();
+
     const itemToUpdate = {
       ...item,
       isRenting: true,
-      // startTime: new Date(),
       startTime: startTime,
       rentPeriod: rentPeriod,
-      endTime: endTime(startTime, rentPeriod),
+      endTime: calculateEndTime(startTime, rentPeriod),
     }
     itemsToUpdate[foundIndex] = itemToUpdate;
 
     dispatch({
       type: "ADD_TO_RENTING",
       item: itemToUpdate,
-      // item: {
-      //   ...item,
-      //   isRenting: true,
-      //   rentPeriod: rentPeriod,
-      // },
     });
     // axios -> change server
     // dispath -> changing state in the browser
@@ -120,12 +122,9 @@ export default function ItemBooking(props) {
               <div className='container'>
                 <strong>----Price Quote----</strong>
                 <p>
-                  {/* Renting cost per hour: ${item.cost} */}
-                </p>
-                <p>
-                  Item will be rent for <strong>{rentPeriod}</strong> hours.<br></br>
+                  Item will be rent for <strong>{rentPeriod}</strong> {rentForFormat(rentPeriod)}.<br></br>
                   <strong>FROM&ensp;</strong> {timeFormatDisplay(new Date())}<br></br>
-                  <strong>TO&ensp;&ensp;&ensp;&ensp;</strong> {timeFormatDisplay(endTime(new Date(), rentPeriod))}
+                  <strong>TO&ensp;&ensp;&ensp;&ensp;</strong> {timeFormatDisplay(calculateEndTime(new Date(), rentPeriod))}
                 </p>
               </div>
               <div className='is-clearfix mt-4'>
