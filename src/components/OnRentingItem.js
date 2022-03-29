@@ -36,6 +36,14 @@ export default function OnRentingItem(props) {
       type: 'UPDATE_ITEMS',
       items: itemsToUpdate,
     });
+    // update end early status rented history
+    // dispatch({
+    //   type: 'UPDATE_RENTED',
+    //   item: {
+    //     ...item,
+    //     endEarly: true,
+    //   }
+    // })
   }
   // for extending the time of the item
   const [extendTimeNoti, setExtendTimeNoti] =  useState(false);

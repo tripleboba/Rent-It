@@ -34,10 +34,14 @@ export default function ItemBooking(props) {
   const timeFormatDisplay = (t) => {
     return format(t, "hh:mm a - MMM dd, yyyy");
   }
-  const displayHrFormat = (rentPeriod) => {
-    if (Number(rentPeriod) === 0) return '';
-    else if (Number(rentPeriod) === 1) return 'hour';
-    else return 'hours';
+  const displayHrFormat = (hr) => {
+    if (Number(hr) === 0) return '-';
+    else if (Number(hr) === 1) return `${hr} hour`;
+    else return `${hr} hours`;
+  }
+
+  const total = (cost, rentPeriod) => {
+    return (cost * rentPeriod) + 0.3;
   }
 
   // handle button actions
@@ -49,15 +53,16 @@ export default function ItemBooking(props) {
     const foundIndex = itemsToUpdate.findIndex((i)=>{
       return i.id === item.id
     })
-    
+
     const startTime = new Date();
+    const endTime = calculateEndTime(startTime, rentPeriod);
+    const total = (item.cost * rentPeriod) + 0.3;
 
     const itemToUpdate = {
       ...item,
       isRenting: true,
       startTime: startTime,
-      rentPeriod: rentPeriod,
-      endTime: calculateEndTime(startTime, rentPeriod),
+      endTime: endTime,
     }
     itemsToUpdate[foundIndex] = itemToUpdate;
 
@@ -71,10 +76,22 @@ export default function ItemBooking(props) {
       type: 'UPDATE_ITEMS',
       items: itemsToUpdate,
     });
+    dispatch({
+      type: "ADD_TO_RENTED",
+      item: {
+        id: item.id, 
+        image: item.image,
+        title: item.title,
+        description: item.description,
+        total: total,
+        startTime: startTime,
+        endTime: endTime,
+      },
+    });
   }
 
   // because the redirect is using Link -> use this to find the item
-  const {id } = useParams()
+  const {id} = useParams()
   const item = allItems.find((selectItem)=>{ return Number(selectItem.id) === Number(id) })
   console.log("item's id get from useParams from ItemBooking.js", useParams());
   console.log('item being selected from ItemBooking.js',item);
@@ -122,8 +139,8 @@ export default function ItemBooking(props) {
               <div className='container'>
                 <strong>----Price Quote----</strong>
                 <p>
-                  Item will be rent for <strong>{rentPeriod}</strong> {displayHrFormat
-              (rentPeriod)}.<br></br>
+                  Item will be rent for <strong>{displayHrFormat(rentPeriod)}</strong>
+                  <br></br>
                   <strong>FROM&ensp;</strong> {timeFormatDisplay(new Date())}<br></br>
                   <strong>TO&ensp;&ensp;&ensp;&ensp;</strong> {timeFormatDisplay(calculateEndTime(new Date(), rentPeriod))}
                 </p>
@@ -137,7 +154,7 @@ export default function ItemBooking(props) {
                   <CurrencyFormat
                     // renderTex={(value) => ({value})}
                     decimalScale={2}
-                    value={(item.cost * rentPeriod) + 0.3}
+                    value={total(item.cost, rentPeriod)}
                     displayType={"text"}
                     thousandSeparator={true}
                     prefix={"CAD $"}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useStateValue } from '../providers/StateProvider';
 import { format } from "date-fns";
+import CurrencyFormat from 'react-currency-format';
 // should go to the server -> go back notification -> match up all the renting time -> setTimeOut
 
 export default function ExtendTime(props) {
@@ -10,11 +11,24 @@ export default function ExtendTime(props) {
   const [extendedHour, setExtraHour] = useState(0);
   const getSelectedHr = e => {
     setExtraHour(e.target.value);
-    // console.log("selected extendedHour from ExtendTime.js", extendedHour);
   }
-
+  const calculateNewEndTime = (oldEndTime, extendedHour) => {
+    const newEndTime = new Date(oldEndTime.getTime());
+    newEndTime.setHours(oldEndTime.getHours() + Number(extendedHour));
+    return newEndTime;
+  };
+  // const calculateRemainingTime = (startTime, currentTime) => {
+  //   const remainingTime = new Date(startTime.getTime());
+  //   remainingTime.setHours(currentTime.getHours() - startTime.getHours());
+  //   return remainingTime;
+  // };
   const timeFormatDisplay = (t) => {
     return format(t, "hh:mm a - MMM dd, yyyy");
+  }
+  const displayHrFormat = (hr) => {
+    if (Number(hr) === 0) return '-';
+    else if (Number(hr) === 1) return `${hr} hour`;
+    else return `${hr} hours`;
   }
   
   // handle extending time
@@ -25,24 +39,40 @@ export default function ExtendTime(props) {
   // use Date obj take the current time (POST request that grab the time now - rented time )
 
 
-  // const updateRentingTime = () => {
-  //   const itemsToUpdate = [...allItems];
-  //   const foundIndex = itemsToUpdate.findIndex((i)=>{
-  //     return i.id === item.id
-  //   })
-  //   const itemToUpdate = {
-  //     ...item,
-  //     isRenting: false,
-  //     rentTime: 0,
-  //   }
-  //   itemsToUpdate[foundIndex] = itemToUpdate;
+  const extendRentingTime = () => {
+    const itemsToUpdate = [...allItems];
+    const foundIndex = itemsToUpdate.findIndex((i)=>{
+      return i.id === item.id
+    })
+    const onRentingItemToUpdate = [...rentingBasket];
+    const foundIndexRentingBasket = onRentingItemToUpdate.findIndex((i)=> {
+      return i.id === item.id
+    })
 
-  //   // then update its renting status
-  //   dispatch({
-  //     type: 'UPDATE_ITEMS',
-  //     items: itemsToUpdate,
-  //   });
-  // }
+    const oldEndTime = new Date((item.endTime).getTime());
+    const newEndTime = calculateNewEndTime(oldEndTime, extendedHour);
+
+    const itemToUpdate = {
+      ...item,
+      endTime: newEndTime,
+    }
+    itemsToUpdate[foundIndex] = itemToUpdate;
+    onRentingItemToUpdate[foundIndexRentingBasket] = itemToUpdate;
+
+    // then update its renting status
+    dispatch({
+      type: 'UPDATE_RENTING',
+      items: onRentingItemToUpdate,
+      // {
+      //   ...item,
+      //   endTime: newEndTime,
+      // }
+    })
+    dispatch({
+      type: 'UPDATE_ITEMS',
+      items: itemsToUpdate,
+    });
+  }
 
 
 /** click on confirm -> update
@@ -65,16 +95,37 @@ export default function ExtendTime(props) {
       <div className="message-body">
         
         {extendedHour ? (
-          <div className="container mb-3">
-            <strong>---Price Quote---</strong>
-            <p>Start: {timeFormatDisplay(item.startTime)}</p>
-            <p>End: {timeFormatDisplay(item.endTime)}</p>
-            <br></br>
-            <p>Add: {extendedHour} more hours</p>
-            <p>New Renting Time: ({extendedHour} + remaining_hour) hours</p>
-            <p>New Total: ({extendedHour} * {item.cost}) + $0.3 fee</p>
+          <div className="container mb-2">
+            <div className="container">
+              <p>Start Time: {timeFormatDisplay(item.startTime)}</p>
+              <p>Old End Time: {timeFormatDisplay(item.endTime)}</p>
+              <br></br>
+              <p>Extend for: <strong>{displayHrFormat(extendedHour)}</strong> at 
+               <CurrencyFormat
+                      decimalScale={2}
+                      value={item.cost}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      prefix={" $"}/>
+                /hr price
+              </p>
+              <br></br>
+            </div>
+            <div className='is-clearfix'>
+                <p><strong>New End Time: {timeFormatDisplay(calculateNewEndTime(item.endTime, extendedHour))}</strong></p>
+              <div className='field is-pulled-left'>
+                <strong>New Total: </strong>
+                <CurrencyFormat
+                        decimalScale={2}
+                        value={(item.cost * extendedHour)}
+                        displayType={"text"}
+                        thousandSeparator={true}
+                        prefix={"CAD $"}
+                />
+              </div>
+              <div className='field is-pulled-right'>payment api</div>
+            </div>
           </div>
-
         ): ""}
         <div className="field has-addons">
           <div className="control is-expanded">
@@ -91,7 +142,7 @@ export default function ExtendTime(props) {
           </div>
           <div className="control">
             <button className="button is-success is-rounded is-small"
-              type="submit" 
+              type="submit" onClick={extendRentingTime} 
               >Confirm</button>
           </div>
         </div>

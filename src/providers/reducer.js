@@ -28,11 +28,16 @@ const reducer = (state, action) => {
         ...state,
         allItems: [...action.items]
       };
-    case 'ADD_TO_RENTING':
+      case 'ADD_TO_RENTING':
+        return{
+          ...state,
+          rentingBasket: [...state.rentingBasket, action.item],
+        };
+    case 'UPDATE_RENTING':
       return{
         ...state,
-        rentingBasket: [...state.rentingBasket, action.item],
-      };
+        rentingBasket: [...action.items],
+      }
     case 'REMOVE_FROM_RENTING':
       const index = state.rentingBasket.findIndex(
         (thisItem) => thisItem.id === action.id
@@ -43,9 +48,19 @@ const reducer = (state, action) => {
         tempBasket.splice(index, 1);
       }
       return {
-        ...state, 
-        rentingBasket: tempBasket
+        ...state,
+        rentingBasket: tempBasket,
       };
+    case 'ADD_TO_RENTED':
+      return{
+        ...state,
+        rentedBasket: [...state.rentedBasket, action.item],
+      };
+      case 'UPDATE_RENTED':
+        return{
+          ...state,
+          rentedBasket: [...action.item],
+        }
     default:
       return state;
   }
