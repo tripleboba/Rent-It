@@ -1,7 +1,6 @@
 import { React } from 'react'
 import { useStateValue } from '../providers/StateProvider';
 import OnRentingItem from './OnRentingItem';
-import { getTotalRenting } from '../providers/reducer';
 /**
  * Act as a cart that keeping item data until item is expired
  */
