@@ -7,17 +7,11 @@ import items from '../data/db';
  */
 
 export const initialState = {
-  allItems:[...items],
-  selectedItem:{},
-  rentingBasket:[],
+  allItems: [...items],
+  // selectedItem: {},
+  rentingBasket: [],
   rentedBasket: [],
 };
-
-// selector helper - not working!
-export const getTotalRenting = rentingBasket => {
-  rentingBasket?.reduce(
-    (amount, item) => item.cost + amount, 0);
-}
 
 const reducer = (state, action) => {
   console.log(action);

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useStateValue } from "../providers/StateProvider";
 import ExtendTime from "./ExtendTime";
+import format from "date-fns/format";
 /**
  * Item"s information
  * Act as each item"s page
@@ -8,10 +9,17 @@ import ExtendTime from "./ExtendTime";
 
 export default function OnRentingItem(props) {
   const {...item} = props;
+  const timeFormatDisplay = (t) => {
+    return format(t, "hh:mm a - MMM dd, yyyy");
+  }
+  
+  // for triggering <ExtendTime>
+  const [extendTimeNoti, setExtendTimeNoti] =  useState(false);
 
   // for remove the item from the on-renting page
   const [{rentingBasket, allItems}, dispatch] = useStateValue();
   console.log("renting basket from OnRentingItem.js: ", rentingBasket);
+  
   const removeFromRenting = () => {
     const itemsToUpdate = [...allItems];
     const foundIndex = itemsToUpdate.findIndex((i)=>{
@@ -45,8 +53,6 @@ export default function OnRentingItem(props) {
     //   }
     // })
   }
-  // for extending the time of the item
-  const [extendTimeNoti, setExtendTimeNoti] =  useState(false);
 
   return (
     <div className=" column is-half">
@@ -68,11 +74,13 @@ export default function OnRentingItem(props) {
         </div>
 
         {/* Display renting detail */}
-        <div className="container pt-2">
-          {/* <div className="columns">
-            <div className="column"><small><b>Start time</b></small></div>
-            <div className="column"><small><b>End time</b></small></div>
-          </div> */}
+        <div className="container">
+          <div className="columns">
+            {/* <div className="column"><small><b>Start time</b></small></div> */}
+            <div className="column">
+              <small><b>End time: </b>{timeFormatDisplay(item.endTime)}</small>
+            </div>
+          </div>
           {/* <small>Counter</small> */}
         
           {/* Button and Extend Time form */}
@@ -86,6 +94,8 @@ export default function OnRentingItem(props) {
               >End</button>
           </div>
         </div>
+        
+        {/* show the <ExtendTime> form */}
         <ExtendTime trigger={extendTimeNoti} setTrigger={setExtendTimeNoti} item={item} />
       
       </div>

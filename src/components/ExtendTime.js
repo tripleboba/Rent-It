@@ -6,7 +6,7 @@ import CurrencyFormat from 'react-currency-format';
 
 export default function ExtendTime(props) {
   const {item} = props;
-  
+
   // handle dropdown select
   const [extendedHour, setExtraHour] = useState(0);
   const getSelectedHr = e => {
@@ -109,10 +109,10 @@ export default function ExtendTime(props) {
                       prefix={" $"}/>
                 /hr price
               </p>
+              <p><strong>New End Time: {timeFormatDisplay(calculateNewEndTime(item.endTime, extendedHour))}</strong></p>
               <br></br>
             </div>
             <div className='is-clearfix'>
-                <p><strong>New End Time: {timeFormatDisplay(calculateNewEndTime(item.endTime, extendedHour))}</strong></p>
               <div className='field is-pulled-left'>
                 <strong>New Total: </strong>
                 <CurrencyFormat
