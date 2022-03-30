@@ -92,8 +92,8 @@ export default function ExtendTime(props) {
         {props.children}
       </div>
 
+      {/* display input form and calculation */}
       <div className="message-body">
-        
         {extendedHour ? (
           <div className="container mb-2">
             <div className="container">
@@ -126,7 +126,8 @@ export default function ExtendTime(props) {
               <div className='field is-pulled-right'>payment api</div>
             </div>
           </div>
-        ): ""}
+        ): ("")
+        }
         <div className="field has-addons">
           <div className="control is-expanded">
             <div className="select is-fullwidth is-small is-rounded">
@@ -142,7 +143,15 @@ export default function ExtendTime(props) {
           </div>
           <div className="control">
             <button className="button is-success is-rounded is-small"
-              type="submit" onClick={extendRentingTime} 
+              type="submit"
+              onClick={() => {
+                  extendRentingTime();
+                  // close ExtendTime's input form when confirm extended hour
+                  props.setTrigger(false);
+                  setExtraHour(0);
+                  props.setUpdateStatus(true);
+                }
+              } 
               >Confirm</button>
           </div>
         </div>

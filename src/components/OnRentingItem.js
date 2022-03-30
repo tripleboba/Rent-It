@@ -15,6 +15,9 @@ export default function OnRentingItem(props) {
   
   // for triggering <ExtendTime>
   const [extendTimeNoti, setExtendTimeNoti] =  useState(false);
+  
+  // display updated! for extending time
+  const [updateStatus, setUpdateStatus] = useState(false);
 
   // for remove the item from the on-renting page
   const [{rentingBasket, allItems}, dispatch] = useStateValue();
@@ -53,6 +56,7 @@ export default function OnRentingItem(props) {
     //   }
     // })
   }
+  
 
   return (
     <div className=" column is-half">
@@ -78,7 +82,12 @@ export default function OnRentingItem(props) {
           <div className="columns">
             {/* <div className="column"><small><b>Start time</b></small></div> */}
             <div className="column">
-              <small><b>End time: </b>{timeFormatDisplay(item.endTime)}</small>
+              <div className="is-clearfix mt-3">
+                <small className="is-pulled-left"><b>End time: </b>{timeFormatDisplay(item.endTime)}</small>
+                {updateStatus ? (
+                  <small className="is-pulled-right has-text-success">updated!</small>
+                ):("")}
+              </div>
             </div>
           </div>
           {/* <small>Counter</small> */}
@@ -94,9 +103,12 @@ export default function OnRentingItem(props) {
               >End</button>
           </div>
         </div>
-        
+
         {/* show the <ExtendTime> form */}
-        <ExtendTime trigger={extendTimeNoti} setTrigger={setExtendTimeNoti} item={item} />
+        <ExtendTime trigger={extendTimeNoti} setTrigger={setExtendTimeNoti} 
+                    item={item}
+                    updateStatus={updateStatus} setUpdateStatus={setUpdateStatus}
+        />
       
       </div>
     </div>
