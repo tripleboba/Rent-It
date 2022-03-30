@@ -17,7 +17,7 @@ export default function RentedHistory() {
 
   const rentedItems = rentedBasket.map((item) => (
     <RentedItem
-      key={item.id}
+      // key={item.id}
       {...item}
     />
   ));

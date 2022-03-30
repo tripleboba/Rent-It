@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useStateValue } from "../providers/StateProvider";
 import ExtendTime from "./ExtendTime";
 import format from "date-fns/format";
+import Countdown from "react-countdown";
 /**
  * Item"s information
  * Act as each item"s page
@@ -56,8 +57,20 @@ export default function OnRentingItem(props) {
     //   }
     // })
   }
-  
 
+  // timer
+  const timeCounter = ({ hours, minutes, seconds, completed }) => {
+    if (completed) {
+      // Render a completed state
+      return 'Time is over!';
+    } else {
+      // Render a countdown
+      return (
+        <span>{hours}:{minutes}:{seconds}</span>
+      );
+    }
+  };
+  
   return (
     <div className=" column is-half">
       <div className="box">
@@ -90,7 +103,16 @@ export default function OnRentingItem(props) {
               </div>
             </div>
           </div>
-          {/* <small>Counter</small> */}
+
+          <div className="container">
+            <small><strong>Remaining time: </strong></small>
+            <small>
+              <Countdown
+                date={Date.now() + (item.endTime - Date.now())}
+                renderer={timeCounter}
+              />
+            </small>
+          </div>
         
           {/* Button and Extend Time form */}
           <div className="buttons has-addons is-small is-right">

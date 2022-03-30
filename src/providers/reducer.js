@@ -53,7 +53,7 @@ const reducer = (state, action) => {
       case 'UPDATE_RENTED':
         return{
           ...state,
-          rentedBasket: [...action.item],
+          rentedBasket: [...action.items],
         }
     default:
       return state;

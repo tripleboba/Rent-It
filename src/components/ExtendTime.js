@@ -33,7 +33,7 @@ export default function ExtendTime(props) {
   
   // handle extending time
   console.log('item being chosen to extend renting time from ExtendTime.js', item);
-  const [{rentingBasket, allItems}, dispatch] = useStateValue();
+  const [{rentingBasket, rentedBasket, allItems}, dispatch] = useStateValue();
   // get the extending item's id and renting coist from the rentingBasket
   // get the remaining hour from the allItems
   // use Date obj take the current time (POST request that grab the time now - rented time )
@@ -51,6 +51,7 @@ export default function ExtendTime(props) {
 
     const oldEndTime = new Date((item.endTime).getTime());
     const newEndTime = calculateNewEndTime(oldEndTime, extendedHour);
+    const total = (item.cost * extendedHour);
 
     const itemToUpdate = {
       ...item,
@@ -72,6 +73,20 @@ export default function ExtendTime(props) {
       type: 'UPDATE_ITEMS',
       items: itemsToUpdate,
     });
+
+    // dispatch({
+    //   type: "UPDATE_RENTED",
+    //   item: {
+    //     // id: item.id, 
+    //     // image: item.image,
+    //     // title: item.title,
+    //     // description: item.description,
+    //     ...item, 
+    //     total: total,
+    //     startTime: oldEndTime,
+    //     endTime: newEndTime,
+    //   },
+    // });
   }
 
 

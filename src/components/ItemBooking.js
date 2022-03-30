@@ -45,7 +45,7 @@ export default function ItemBooking(props) {
   }
 
   // handle button actions
-  const [{rentingBasket, allItems}, dispatch] = useStateValue();
+  const [{rentingBasket, rentedBasket, allItems}, dispatch] = useStateValue();
   
   const addToRenting = () => {
     const itemsToUpdate = [...allItems];
@@ -83,6 +83,7 @@ export default function ItemBooking(props) {
         image: item.image,
         title: item.title,
         description: item.description,
+        
         total: total,
         startTime: startTime,
         endTime: endTime,
