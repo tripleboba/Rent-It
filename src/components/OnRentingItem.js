@@ -66,7 +66,7 @@ export default function OnRentingItem(props) {
     } else {
       // Render a countdown
       return (
-        <span>{hours}:{minutes}:{seconds}</span>
+        <span className="has-text-link">{hours} {hours > 1 ? 'hrs':'hr'} : {minutes} {minutes > 1 ? 'mins':'min'} : {seconds} {seconds > 1 ? 'secs':'sec'}</span>
       );
     }
   };
