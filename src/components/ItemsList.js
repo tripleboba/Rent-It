@@ -17,7 +17,7 @@ export default function ItemsList(props) {
 
   return (
     <div className='section'>
-      <div className='title is-4'>For Rent</div>
+      {/* <div className='title is-4'>For Rent</div> */}
         <div className="column columns is-multiline">
           {items && items.length ? listOfItems : 
             ( <div className="column">
