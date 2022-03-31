@@ -2,9 +2,8 @@
 The app lets users rent random items for their needs. 
 
 ---
-🤝 a 2-week group project
 
-![Demo](/display/vid.mov)
+![Demo](/display/demo.gif)
 
 📎 [Project Planning Document](https://docs.google.com/document/d/1sMlIi3WJHp9NcmU6wGgn4QZvl4PSnnIVa_nAnSjeHhM/edit?usp=sharing)
 
