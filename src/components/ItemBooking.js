@@ -1,8 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useStateValue } from '../providers/StateProvider';
 import { format } from "date-fns";
 import CurrencyFormat from 'react-currency-format';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import axios from "../axios"
+
 /**
  * Booking component
  *  display chosen time
@@ -39,7 +42,6 @@ export default function ItemBooking(props) {
     else if (Number(hr) === 1) return `${hr} hour`;
     else return `${hr} hours`;
   }
-
   const total = (cost, rentPeriod) => {
     return (cost * rentPeriod) + 0.3;
   }
@@ -90,6 +92,48 @@ export default function ItemBooking(props) {
       },
     });
   }
+
+  // payment api states
+  const stripe = useStripe();
+  const elements = useElements();
+  const [succeeded, setSucceeded] = useState(false);
+  const [processing, setProcessing] = useState("");
+  const [error, setError] = useState(null);
+  const [disabled, setDisabled] = useState(true);
+  const [userCharge, setUserCharge] = useState(true);
+  
+  // payment handlers
+  useEffect(() => {
+    const getUserCharge = async() => {
+      const res = await axios({
+        method: 'post',
+        url: `/payments/create?total=${total * 100}`  // stripe requires subunits of the charge input * 100 -> cents
+      });
+      setUserCharge(res.data.userCharge)
+    }
+    getUserCharge();
+  }, total);
+  const handlePaymentSubmit = async (e) => {
+    e.preventDefault();
+    setProcessing(true);
+    const payload = await stripe.confirmCardPayments(userCharge, {
+      payment_method: {
+        card: elements.getElement(CardElement)
+      }
+    }).then(({paymentIntent}) => {  // from stripe
+      setSucceeded(true);
+      setError(null);
+      setProcessing(false);
+      
+    })
+
+  }
+  const handlePayment = (e) => {
+    setDisabled(e.empty);
+    setError(e.error ? e.error.message : "");
+
+  }
+
 
   // because the redirect is using Link -> use this to find the item
   const {id} = useParams()
@@ -161,7 +205,27 @@ export default function ItemBooking(props) {
                     prefix={"CAD $"}
                   />
                 </div>
-                <div className='field is-pulled-right'>payment api</div>
+
+                {/* <div className='field is-pulled-right'> */}
+                  <div className="container pt-3 pb-3">
+                    <div className='container'>
+                      <form onSubmit={handlePaymentSubmit}>
+                        <CardElement onChange={handlePayment}/>
+                        <button
+                          disabled={processing || disabled || succeeded}
+                        >
+                          <span>{processing ? <p>Processing</p> : "Test Bug"}</span>
+                        </button>
+                      </form>
+                    </div>
+                    <div className='container'>
+                      {error && <div>{error}</div>}
+                    </div>
+
+
+                  </div>
+                {/* </div> */}
+
               </div>
             </div>
             
@@ -184,7 +248,11 @@ export default function ItemBooking(props) {
                   onClick={addToRenting}
                   // unable the button when item is rented 
                   disabled={item.isRenting}
-                  >Rent Now</button>
+                  // disabled = {item.isRenting || processing || disabled || succeeded}
+                  >
+                    Rent Now
+                    {/* <span>{processing ? <p>Processing</p> : "Rent Now"}</span> */}
+                  </button>
               </div>
             </div>
             

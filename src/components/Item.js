@@ -65,9 +65,9 @@ export default function Item(props) {
                 )}
               </div>
             </div>
-            <div>{item.description}</div>
+            <div className="container">{item.description}</div>
               {/* if using <button> handle() -> reducer and use the selectedItem{} */}
-            <div className="container">
+            <div className="container mt-3">
               <Link className="button is-small is-outlined is-info is-pulled-right"
                 to={item.isRenting ? '#' : `/items/${item.id}`}
                 disabled={item.isRenting}

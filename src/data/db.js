@@ -1,12 +1,13 @@
 // hardcode database
 const items = [
-  {id: 1, title:"pig on fire", description:"can code and smells great",isRenting:false, cost: 12,image:"https://i.pinimg.com/originals/76/ac/74/76ac7443cee64e44a905aafae9fb49dd.gif"},
-  {id: 2, title:"demanding cat", description:"eat every 5 minutes", isRenting:false, cost: 5,image:"https://i.pinimg.com/originals/6a/0e/ad/6a0ead42d3907b1310e67c33cb638211.gif"},
-  {id: 3, title:"judging monkey", description:"for someone who wants judgmental pet", isRenting:true, cost: 20, rentTime: 60,image:"https://media0.giphy.com/media/cJMlR1SsCSkUjVY3iK/giphy.gif?cid=ecf05e47t053t561jjr34snk2gvgrobziionmb3igwnydwqo&rid=giphy.gif&ct=g"},
-  {id: 5, title:"special sandwich maker", description:"for a day you just want to turn into an idiot sandwich", isRenting:false, cost: 549.99,image:"https://i0.wp.com/media1.giphy.com/media/zKOqnQprdq2gU/giphy.gif?resize=640%2C640&ssl=1&crop=1"},
-  {id: 4, title:"rooster tripper ", description:"🔞 explicit content - check with your rooster before renting it for your hens", isRenting:false, cost: 250,image:"https://media.giphy.com/media/U18af5l5Xzdxm/giphy.gif"},
-  {id: 6, title:"flock of sheep and a llama", description:"for you to count in your sleepless night (deposit required)", isRenting:false, cost: 1200,image:"https://c.tenor.com/CNazqP5LprUAAAAM/in-disguise-this-is-happening.gif"},
-  {id: 7, title:"sheep caregiver", description:"help gathering the flock for you to count (discount if rent with the flock)", isRenting:false, cost: 49.99,image:"https://78.media.tumblr.com/709a105a7f6233be4b2f9ace278b10e7/tumblr_om72t94MtM1tlb56zo1_400.gif"},
+  {id: 1, title:"a table", description:"this is not a chair, this is a table",isRenting:false, cost: 3.99,image:"https://harmonymodern.com/images/thumbs/0006552_infinity-arm-chair_900.png"},
+  {id: 2, title:"a chair", description:"this is not a table, this is a chair", isRenting:false, cost: 5,image:"https://www.ikea.com/ca/en/images/products/moerbylanga-table-oak-veneer-brown-stained__0737108_pe740890_s5.jpg"},
+  {id: 3, title:"a banana", description:"it's yellow", isRenting:false, cost: 1.99,image:"https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg"},
+  {id: 4, title:"piece of duct tape", description:"3M brand, grey color", isRenting:false, cost: 0.99,image:"https://i.pinimg.com/736x/1f/a2/5f/1fa25f4d74ad38be4059150552d76394.jpg"},
+  {id: 5, title:"the Unicorn of the Art World", description:"now you can rent it - installation included", isRenting:false, cost: 549.99,image:"https://www.refinery29.com/images/8985540.jpg"},
+  {id: 6, title:"judging monkey", description:"for someone who wants judgmental pet", isRenting:true, cost: 20, rentTime: 60,image:"https://media0.giphy.com/media/kdFKwmwADglUorwrIa/giphy.webp?cid=ecf05e475flh0kyvf4773hn0lxltebalvcagyao51folyhx0&rid=giphy.webp&ct=g"},
+  {id: 7, title:"a spoon", description:"yest, it is a spoon", isRenting:false, cost: 1.29,image:"https://marthabeck.com/wp-content/uploads/2016/10/spoon.jpg"},
+  {id: 8, title:"a flip flop", description:"right side, gender-neutral color", isRenting:false, cost: 3,image:"https://cf.shopee.ph/file/23aab4e23db69af5535c60331e3e302b"},
 ];
 
 export default items;
