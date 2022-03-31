@@ -2,7 +2,9 @@
 The app lets users rent random items for their needs. 
 
 ---
-🤝 a 2-week group project (team of 2)
+🤝 a 2-week group project
+
+![Demo](/display/vid.mov)
 
 📎 [Project Planning Document](https://docs.google.com/document/d/1sMlIi3WJHp9NcmU6wGgn4QZvl4PSnnIVa_nAnSjeHhM/edit?usp=sharing)
 
@@ -13,6 +15,7 @@ The app lets users rent random items for their needs.
   - css: Bulma framework
 - Back-end: Express, Node 
   - external db: JSON server
+
 
 ---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

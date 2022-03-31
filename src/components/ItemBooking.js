@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom'
 import { useStateValue } from '../providers/StateProvider';
 import { format } from "date-fns";
 import CurrencyFormat from 'react-currency-format';
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import axios from "../axios"
+// import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+// import axios from "../axios"
 
 /**
  * Booking component
@@ -93,46 +93,46 @@ export default function ItemBooking(props) {
     });
   }
 
-  // payment api states
-  const stripe = useStripe();
-  const elements = useElements();
-  const [succeeded, setSucceeded] = useState(false);
-  const [processing, setProcessing] = useState("");
-  const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(true);
-  const [userCharge, setUserCharge] = useState(true);
+  // // payment api states
+  // const stripe = useStripe();
+  // const elements = useElements();
+  // const [succeeded, setSucceeded] = useState(false);
+  // const [processing, setProcessing] = useState("");
+  // const [error, setError] = useState(null);
+  // const [disabled, setDisabled] = useState(true);
+  // const [userCharge, setUserCharge] = useState(true);
   
-  // payment handlers
-  useEffect(() => {
-    const getUserCharge = async() => {
-      const res = await axios({
-        method: 'post',
-        url: `/payments/create?total=${total * 100}`  // stripe requires subunits of the charge input * 100 -> cents
-      });
-      setUserCharge(res.data.userCharge)
-    }
-    getUserCharge();
-  }, total);
-  const handlePaymentSubmit = async (e) => {
-    e.preventDefault();
-    setProcessing(true);
-    const payload = await stripe.confirmCardPayments(userCharge, {
-      payment_method: {
-        card: elements.getElement(CardElement)
-      }
-    }).then(({paymentIntent}) => {  // from stripe
-      setSucceeded(true);
-      setError(null);
-      setProcessing(false);
+  // // payment handlers
+  // useEffect(() => {
+  //   const getUserCharge = async() => {
+  //     const res = await axios({
+  //       method: 'post',
+  //       url: `/payments/create?total=${total * 100}`  // stripe requires subunits of the charge input * 100 -> cents
+  //     });
+  //     setUserCharge(res.data.userCharge)
+  //   }
+  //   getUserCharge();
+  // }, total);
+  // const handlePaymentSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setProcessing(true);
+  //   const payload = await stripe.confirmCardPayments(userCharge, {
+  //     payment_method: {
+  //       card: elements.getElement(CardElement)
+  //     }
+  //   }).then(({paymentIntent}) => {  // from stripe
+  //     setSucceeded(true);
+  //     setError(null);
+  //     setProcessing(false);
       
-    })
+  //   })
 
-  }
-  const handlePayment = (e) => {
-    setDisabled(e.empty);
-    setError(e.error ? e.error.message : "");
+  // }
+  // const handlePayment = (e) => {
+  //   setDisabled(e.empty);
+  //   setError(e.error ? e.error.message : "");
 
-  }
+  // }
 
 
   // because the redirect is using Link -> use this to find the item
@@ -207,7 +207,7 @@ export default function ItemBooking(props) {
                 </div>
 
                 {/* <div className='field is-pulled-right'> */}
-                  <div className="container pt-3 pb-3">
+                  {/* <div className="container pt-3 pb-3">
                     <div className='container'>
                       <form onSubmit={handlePaymentSubmit}>
                         <CardElement onChange={handlePayment}/>
@@ -223,7 +223,7 @@ export default function ItemBooking(props) {
                     </div>
 
 
-                  </div>
+                  </div> */}
                 {/* </div> */}
 
               </div>

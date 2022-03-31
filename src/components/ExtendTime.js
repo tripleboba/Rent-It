@@ -138,7 +138,7 @@ export default function ExtendTime(props) {
                         prefix={"CAD $"}
                 />
               </div>
-              <div className='field is-pulled-right'>payment api</div>
+              {/* <div className='field is-pulled-right'>payment api</div> */}
             </div>
           </div>
         ): ("")
