@@ -154,7 +154,7 @@ export default function ItemBooking(props) {
               </figure>
             </div>
           </div>
-          <div className="column ">
+          <div className="column">
             <div className="container">
               <div className="is-clearfix">
                 <div className="field is-pulled-left">
@@ -230,7 +230,7 @@ export default function ItemBooking(props) {
             </div>
             
             {/* Buttons section */}
-            <div className="container">
+            <div className="container mt-3">
               <div className="is-clearfix">
                 <div className="select is-rounded is-pulled-left">
                   <select name="rentPeriod"

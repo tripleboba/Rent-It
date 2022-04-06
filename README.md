@@ -1,5 +1,5 @@
 ## Rent It App
-The app lets users rent random items for their needs. 
+The app lets users rent random items for their needs. (still in process...)
 
 ---
 
